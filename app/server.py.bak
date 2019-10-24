@@ -65,7 +65,7 @@ async def analyze(request):
 	for	i in range(50, 150,	1):
 		r =	randint(0,1)*255
 		img_bytes[i] = r
-
+	print('image array random!\n')
 	return JSONResponse(img_bytes)
 
 
