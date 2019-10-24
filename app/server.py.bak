@@ -56,7 +56,7 @@ async def homepage(request):
     return HTMLResponse(html_file.open().read())
 
 # 修改：传送文本信息为传送二进制图像信息
-#此处由javascript中"analyze()"方法触发
+# 此处由javascript中"analyze()"方法触发
 @app.route('/analyze', methods=['POST'])	
 async def analyze(request):
     img_data = await request.form()
