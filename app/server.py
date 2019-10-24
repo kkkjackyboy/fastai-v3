@@ -55,20 +55,16 @@ async def homepage(request):
     html_file = path / 'view' / 'index.html'
     return HTMLResponse(html_file.open().read())
 
-# 修改：传送文本信息为传送二进制图像信息
-# 此处由javascript中"analyze()"方法触发
 @app.route('/analyze', methods=['POST'])	
 async def analyze(request):
     img_data = await request.form()
     img_bytes = await (img_data['file'].read())
     #img = open_image(BytesIO(img_bytes))
 
-	# 修改img中部分内容（将一部分内容打上噪音）
 	for i in range(img_bytes.length/5, img_bytes.length/2):
 		r = randint(0,1)*255
 		img_bytes[i] = r
 
-	# 将图像以二进制流的形式发送
 	return JSONResponse(img_bytes)
 
 
