@@ -61,7 +61,7 @@ async def analyze(request):
     img_bytes = await (img_data['file'].read())
     #img = open_image(BytesIO(img_bytes))
 
-	for i in range(img_bytes.length/5, img_bytes.length/2):
+	for i in range(len(img_bytes)/5, len(img_bytes)/2):
 		r = randint(0,1)*255
 		img_bytes[i] = r
 
