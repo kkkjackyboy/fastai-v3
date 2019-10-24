@@ -60,12 +60,15 @@ async def homepage(request):
 async def analyze(request):
 	img_data = await request.form()
 	img_bytes =	await (img_data['file'].read())
+	img_array = bytearray(img_bytes)
 	#img = open_image(BytesIO(img_bytes))
 
 	#for i in range(len(img_bytes)/5, len(img_bytes)/2):
 	for	i in range(50, 150,	1):
 		r =	random.randint(0,1)*255
-		img_bytes[i] = b'\x00'
+		img_array[i] = b'\x00'
+	
+	img_bytes = bytes(img_array)
 	print('image array random!\n')
 	return JSONResponse(img_bytes)
 
