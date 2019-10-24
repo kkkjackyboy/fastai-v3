@@ -41,6 +41,7 @@ function analyze() {
   if (uploadFiles.length !== 1) alert("Please select a file to analyze!");
 
   el("analyze-button").innerHTML = "Analyzing...";
+
   var xhr = new XMLHttpRequest();
   var loc = window.location;
   xhr.open("POST", `${loc.protocol}//${loc.hostname}:${loc.port}/analyze`,
@@ -48,14 +49,23 @@ function analyze() {
   xhr.onerror = function() {
     alert(xhr.responseText);
   };
+
+  // 以json response形式接收server.py中“analyze(request)”发送过来的文本信息
+  // 利用类似方法，可以接收图像数据（图像数据是否可以以PNG编码压缩？需要对
+  // 接收数据大小和PNG压缩文件进行比较确认）
+  xhr.responseType = 'json';
   xhr.onload = function(e) {
     if (this.readyState === 4) {
-      var response = JSON.parse(e.target.responseText);
-      el("result-label").innerHTML = `Result = ${response["result"]}`;
+      //var response = JSON.parse(e.target.responseText);
+      //el("result-label").innerHTML = `Result = ${response["result"]}`;
+
+	  el("image-picked").src = JSON.parse(e.target.response);
+
     }
     el("analyze-button").innerHTML = "Analyze";
   };
 
+  // 在xhr.open打开server.py中“analyze(request)”方法后，发送图像数据
   var fileData = new FormData();
   fileData.append("file", uploadFiles[0]);
   xhr.send(fileData);

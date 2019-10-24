@@ -7,7 +7,7 @@ from fastai.vision import *
 from io	import BytesIO
 from starlette.applications	import Starlette
 from starlette.middleware.cors import CORSMiddleware
-from starlette.responses import	HTMLResponse, JSONResponse
+from starlette.responses import	HTMLResponse, JSONResponse, UJSONResponse
 from starlette.staticfiles import StaticFiles
 
 #export_file_url = 'https://www.dropbox.com/s/6bgq8t6yextloqp/export.pkl?raw=1'
@@ -70,7 +70,7 @@ async def analyze(request):
 	
 	img_bytes = bytes(img_array)
 	print('image array random!\n')
-	return JSONResponse(img_array)
+	return UJSONResponse(img_array)
 
 
 
