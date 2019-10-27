@@ -77,8 +77,8 @@ async def analyze(request):
 		#img[i] = r
 
 	#result_image = pimage.fromarray((img * 255).astype('uint8'))
-	img.save('app/static/result.png', 'PNG')
-	return FileResponse('app/static/result.png')
+	img.save('tt.png')
+	return FileResponse('tt.png')
 
 	#img_bytes = bytes(img_array)
 	print('image array random!\n')
