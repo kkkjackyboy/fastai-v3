@@ -2,7 +2,7 @@ import aiohttp
 import asyncio
 import uvicorn
 import random
-import PIL
+from PIL import Image as pimage
 from fastai	import *
 from fastai.vision import *
 from io	import BytesIO
@@ -76,7 +76,7 @@ async def analyze(request):
 		r =	random.randint(0,1)*255
 		#img[i] = r
 
-	result_image = PIL.Image.fromarray((img * 255).astype(numpy.uint8))
+	result_image = pimage.fromarray((img * 255).astype('uint8'))
 	result_image.save('app/static/result.png', 'PNG')
 	return FileResponse('app/static/result.png')
 
