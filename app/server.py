@@ -2,6 +2,7 @@ import aiohttp
 import asyncio
 import uvicorn
 import random
+import PIL
 from fastai	import *
 from fastai.vision import *
 from io	import BytesIO
@@ -58,20 +59,31 @@ async def homepage(request):
 
 @app.route('/analyze', methods=['POST'])	
 async def analyze(request):
-	img_data = await request.form()
-	img_bytes =	await (img_data['file'].read())
-	img_array = bytearray(img_bytes)
+	#img_data = await request.form()
+	#img_bytes =	await (img_data['file'].read())
+	#img_array = bytearray(img_bytes)
 	#img = open_image(BytesIO(img_bytes))
+
+	form = await request.form()
+	img_bytes = await form['file'].read()
+	img = open_image(BytesIO(img_bytes))
+	print("inpaiting...")
+	
+
 
 	#for i in range(len(img_bytes)/5, len(img_bytes)/2):
 	for	i in range(50, 150,	1):
 		r =	random.randint(0,1)*255
-		img_array[i] = r
-	
-	img_bytes = bytes(img_array)
-	print('image array random!\n')
-	return UJSONResponse(img_bytes)
+		img[i] = r
 
+	result_image = PIL.Image.fromarray((img * 255).astype(numpy.uint8))
+	result_image.save('app/static/result.png', 'PNG')
+	return FileResponse('app/static/result.png')
+
+	#img_bytes = bytes(img_array)
+	print('image array random!\n')
+	#return UJSONResponse(img_bytes)
+	
 
 
 	#prediction	= learn.predict(img)[0]
