@@ -59,7 +59,7 @@ function analyze() {
       //var response = JSON.parse(e.target.responseText);
       //el("result-label").innerHTML = `Result = ${response["result"]}`;
 
-	  el("image-picked").src = JSON.parse(e.target.response);
+	  el("image-picked2").src = JSON.parse(e.target.response);
 
     }
     el("analyze-button").innerHTML = "Analyze";
