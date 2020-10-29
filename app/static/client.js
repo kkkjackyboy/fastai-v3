@@ -53,7 +53,7 @@ function analyze() {
   // 以json response形式接收server.py中“analyze(request)”发送过来的文本信息
   // 利用类似方法，可以接收图像数据（图像数据是否可以以PNG编码压缩？需要对
   // 接收数据大小和PNG压缩文件进行比较确认）
-  //xhr.responseType = 'document';
+  xhr.responseType = 'document';
   xhr.onload = function(e) {
     if (this.readyState === 4) {
       //var response = JSON.parse(e.target.responseText);
