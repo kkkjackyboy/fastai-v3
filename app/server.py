@@ -8,7 +8,7 @@ from fastai.vision import *
 from io	import BytesIO
 from starlette.applications	import Starlette
 from starlette.middleware.cors import CORSMiddleware
-from starlette.responses import	HTMLResponse, JSONResponse, FileResponse
+from starlette.responses import	HTMLResponse, JSONResponse, FileResponse, UJSONResponse
 from starlette.staticfiles import StaticFiles
 
 #export_file_url = 'https://www.dropbox.com/s/6bgq8t6yextloqp/export.pkl?raw=1'
@@ -59,28 +59,37 @@ async def homepage(request):
 
 @app.route('/analyze', methods=['POST'])	
 async def analyze(request):
-	#img_data = await request.form()
-	#img_bytes =	await (img_data['file'].read())
-	#img_array = bytearray(img_bytes)
-	#img = open_image(BytesIO(img_bytes))
+	img_data = await request.form()
+	img_bytes =	await (img_data['file'].read())
+	img_array = bytearray(img_bytes)
+	img = open_image(BytesIO(img_bytes))
 
-	form = await request.form()
-	img_bytes = await form['file'].read()
-	img = pimage.open(BytesIO(img_bytes))
+	#form = await request.form()
+	#img_bytes = await form['file'].read()
+	#img = pimage.open(BytesIO(img_bytes))
 
 	print("inpaiting...")
-	pixels = img.load()
-	for	i in range(img.size[0]):
-		for j in range(img.size[1]):
-			r =	random.randint(0,1)*255
-			pixels[i,j] = (r, r, r)
+
+	for	i in range(50, 150,	1):
+		r =	random.randint(0,1)*255
+		img_array[i] = r
+	
+	img_bytes = bytes(img_array)
+	print('image array random!\n')
+	return UJSONResponse(img_bytes)
+
+	#pixels = img.load()
+	#for	i in range(img.size[0]):
+	#	for j in range(img.size[1]):
+	#		r =	random.randint(0,1)*255
+	#		pixels[i,j] = (r, r, r)
 
 	#result_image = pimage.fromarray((img * 255).astype('uint8'))
-	img.save('tt.png')
-	return FileResponse('tt.png')
+	#img.save('tt.png')
+	#return FileResponse('tt.png')
 
 	#img_bytes = bytes(img_array)
-	print('image array random!\n')
+	#print('image array random!\n')
 	#return UJSONResponse(img_bytes)
 	
 
