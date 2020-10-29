@@ -77,6 +77,7 @@ async def analyze(request):
 
 	#result_image = pimage.fromarray((img * 255).astype('uint8'))
 	img.save('tt.png')
+	print("tt.png saved!")
 	return FileResponse('tt.png')
 
 	#img_bytes = bytes(img_array)
