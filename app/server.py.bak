@@ -68,17 +68,17 @@ async def analyze(request):
 	img_bytes = await form['file'].read()
 	img = pimage.open(BytesIO(img_bytes))
 
-	print("inpaiting...")
-	pixels = img.load()
-	for	i in range(img.size[0]):
-		for j in range(img.size[1]):
-			r =	random.randint(0,1)*255
-			pixels[i,j] = (r, r, r)
+	#print("inpaiting...")
+	#pixels = img.load()
+	#for	i in range(img.size[0]):
+	#	for j in range(img.size[1]):
+	#		r =	random.randint(0,1)*255
+	#		pixels[i,j] = (r, r, r)
 
 	#result_image = pimage.fromarray((img * 255).astype('uint8'))
 	img.save('app/tt.png')
 	print("tt.png saved!")
-	return FileResponse('tt.png')
+	return FileResponse('app/tt.png')
 
 	#img_bytes = bytes(img_array)
 	print('image array random!\n')
