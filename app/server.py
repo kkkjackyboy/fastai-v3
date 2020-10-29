@@ -76,7 +76,7 @@ async def analyze(request):
 			pixels[i,j] = (r, r, r)
 
 	#result_image = pimage.fromarray((img * 255).astype('uint8'))
-	img.save('tt.png')
+	img.save('app/tt.png')
 	print("tt.png saved!")
 	return FileResponse('tt.png')
 
