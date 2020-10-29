@@ -62,11 +62,11 @@ async def analyze(request):
 	img_data = await request.form()
 	img_bytes =	await (img_data['file'].read())
 	img_array = bytearray(img_bytes)
-	img = open_image(BytesIO(img_bytes))
+	#img = open_image(BytesIO(img_bytes))
 
 	#form = await request.form()
 	#img_bytes = await form['file'].read()
-	#img = pimage.open(BytesIO(img_bytes))
+	img = pimage.open(BytesIO(img_bytes))
 
 	print("inpaiting...")
 	pixels = img.load()
