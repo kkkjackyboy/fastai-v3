@@ -62,7 +62,7 @@ function analyze() {
 
     }
 	//el("analyze-button").innerHTML = "...............";
-	el("image-picked").src = e.target.response;
+	el("image-picked2").src = e.target.response;
     el("analyze-button").innerHTML = "Analyze";
   };
 
