@@ -3,7 +3,8 @@ import asyncio
 import uvicorn
 import random
 from PIL import Image as pimage
-from fastai.vision.all import *
+from fastai	import *
+from fastai.vision import *
 from io	import BytesIO
 from starlette.applications	import Starlette
 from starlette.middleware.cors import CORSMiddleware
