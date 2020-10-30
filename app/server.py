@@ -63,7 +63,7 @@ async def analyze(request):
 	img_data = await request.form()
 	img_bytes =	await (img_data['file'].read())
 	#img_array = bytearray(img_bytes)
-	img = open_image(BytesIO(img_bytes))
+	#img = open_image(BytesIO(img_bytes))
 
 	#form = await request.form()
 	#img_bytes = await form['file'].read()
@@ -79,7 +79,7 @@ async def analyze(request):
 	#img_bytes = bytes(img_array)
 	#print('image array random!\n')
 
-	encoded_img = base64.encodebytes(img).decode('ascii')
+	encoded_img = base64.b32encode(img_bytes)
 	print(encoded_img)
 	return JSONResponse(encoded_img)
 
