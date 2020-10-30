@@ -76,7 +76,7 @@ async def analyze(request):
 	
 	#img_bytes = bytes(img_array)
 	print('image array random!\n')
-	return UJSONResponse(img_bytes)
+	return JSONResponse(img_bytes)
 
 	#pixels = img.load()
 	#for	i in range(img.size[0]):

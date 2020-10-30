@@ -72,7 +72,8 @@ async def analyze(request):
 
 	for	i in range(50, 150,	1):
 		r =	random.randint(0,1)*255
-		img_array[i] = r
+		#img_array[i] = r
+		img_bytes[i] = b'\x00'
 	
 	#img_bytes = bytes(img_array)
 	print('image array random!\n')
