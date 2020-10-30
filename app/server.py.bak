@@ -80,6 +80,7 @@ async def analyze(request):
 	#print('image array random!\n')
 
 	encoded_img = base64.encodebytes(img_bytes).decode('ascii')
+	print(encoded_img)
 	return JSONResponse(encoded_img)
 
 	#pixels = img.load()
