@@ -63,7 +63,7 @@ async def homepage(request):
 async def analyze(request):
 	img_data = await request.form()
 	img_bytes =	await (img_data['file'].read())
-	img_array = bytearray(img_bytes)
+	#img_array = bytearray(img_bytes)
 	#img = open_image(BytesIO(img_bytes))
 	img_bytes = BytesIO(img_bytes)
 
@@ -103,6 +103,7 @@ async def analyze(request):
 
 	#prediction	= learn.predict(img)[0]
 	#return	JSONResponse({'result':	str(prediction)})
+	return	JSONResponse({'result':	'ok!'})
 
 @app.route("/img2img", methods=['POST'])
 async def img2img(request):
