@@ -74,7 +74,7 @@ async def analyze(request):
 		r =	random.randint(0,1)*255
 		img_array[i] = r
 	
-	img_bytes = bytes(img_array)
+	#img_bytes = bytes(img_array)
 	print('image array random!\n')
 	return UJSONResponse(img_bytes)
 
