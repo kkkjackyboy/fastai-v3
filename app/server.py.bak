@@ -23,6 +23,7 @@ app	= Starlette()
 app.add_middleware(CORSMiddleware, allow_origins=['*'],	allow_headers=['X-Requested-With', 'Content-Type'])
 app.mount('/static', StaticFiles(directory='app/static'))
 
+img_bytes = []
 
 async def download_file(url, dest):
 	if dest.exists(): return
@@ -64,6 +65,7 @@ async def analyze(request):
 	img_bytes =	await (img_data['file'].read())
 	img_array = bytearray(img_bytes)
 	#img = open_image(BytesIO(img_bytes))
+	img_bytes = BytesIO(img_bytes)
 
 	#form = await request.form()
 	#img_bytes = await form['file'].read()
@@ -79,9 +81,9 @@ async def analyze(request):
 	#img_bytes = bytes(img_array)
 	#print('image array random!\n')
 
-	encoded_img = base64.encodebytes(img_array).decode('ascii')
-	print(encoded_img)
-	return JSONResponse(encoded_img)
+	#encoded_img = base64.encodebytes(img_array).decode('ascii')
+	#print(encoded_img)
+	#return JSONResponse(encoded_img)
 
 	#pixels = img.load()
 	#for	i in range(img.size[0]):
@@ -101,6 +103,12 @@ async def analyze(request):
 
 	#prediction	= learn.predict(img)[0]
 	#return	JSONResponse({'result':	str(prediction)})
+
+@app.post("/img2img")
+def img2img():
+    with tempfile.NamedTemporaryFile(mode="w+b", suffix=".png", delete=False) as FOUT:
+        FOUT.write(img_bytes)
+        return FileResponse(FOUT.name, media_type="image/png")
 
 
 if __name__	== '__main__':

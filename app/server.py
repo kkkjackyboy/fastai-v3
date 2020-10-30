@@ -104,8 +104,8 @@ async def analyze(request):
 	#prediction	= learn.predict(img)[0]
 	#return	JSONResponse({'result':	str(prediction)})
 
-@app.post("/img2img")
-def img2img():
+@app.route("/img2img", methods=['POST'])
+async def img2img(request):
     with tempfile.NamedTemporaryFile(mode="w+b", suffix=".png", delete=False) as FOUT:
         FOUT.write(img_bytes)
         return FileResponse(FOUT.name, media_type="image/png")
