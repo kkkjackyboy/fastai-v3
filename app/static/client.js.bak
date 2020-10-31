@@ -44,7 +44,7 @@ function analyze() {
 
   var xhr = new XMLHttpRequest();
   var loc = window.location;
-  xhr.open("POST", `${loc.protocol}${loc.hostname}:${loc.port}/analyze`,
+  xhr.open("POST", "${loc.protocol}${loc.hostname}:${loc.port}/analyze",
     true);
   xhr.onerror = function() {
     alert(xhr.responseText);
@@ -57,7 +57,7 @@ function analyze() {
   //xhr.responseType = 'json';
   xhr.onload = function(e) {
     if (this.readyState === 4) {
-      var response = JSON.parse(e.target.responseText);
+      var response = e.target.responseText;
       el("result-label").innerHTML = `Result = ${response["result"]}`;
 	  
 		//el("image-picked2").src = e.target.response;
